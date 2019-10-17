@@ -16,9 +16,16 @@ ul.appendChild(test);*/
 var button = document.getElementById("send");
 console.log(button);
 
-button.addEventListener("click", test);
+var input = document.getElementById("user_value");
+console.log(input);
 
-var task_count = 1;
+input.addEventListener("keyup", function(event)
+{
+    if (event.keyCode == 13)
+        test();
+});
+
+button.addEventListener("click", test);
 
 function str_contain_alpha(str)
 {
@@ -57,15 +64,28 @@ function str_is_valid(str)
 function test ()
 {
     var str_of_input = document.getElementById("user_value").value;
+    var ul = document.getElementsByClassName("tasks");
     if (str_is_valid(str_of_input))
     {
         var li = document.createElement("li");
-        li.setAttribute("id", task_count);
         li.appendChild(document.createTextNode(str_of_input));
         console.log(li);
         var create_btn = document.createElement("button");
-        task_count++;
         document.getElementById("tasks").appendChild(li);
+        set_id (document.getElementsByTagName("li").length);
+        document.getElementById("user_value").value = "";
     }
+    else
+        {
+            alert("Input field cannot be empty, pleas add at least 1 character");
+        }
+}
+
+function set_id (__int)
+{
+    var i;
+
+    i = 1;
+    console.log(document.getElementsByTagName("li")[i]);
     
 }
